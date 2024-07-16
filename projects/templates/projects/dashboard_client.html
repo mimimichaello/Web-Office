@@ -1,0 +1,69 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><span class="font-weight-bold full_name">{{ client.first_name }} {{ client.last_name }}</span><span class="text-black-60">{{ client.email }}</span><span> {{ client.more.company }}</span></div>
+            <div class="btn-grope d-flex justify-content-center align-items-center">
+                <a class="btn btn-outline-primary my-1" href="{% url "dashboard_client" %}">Главная</a>
+                <a class="btn btn-outline-danger mx-1" href="{% url "logout" %}">Выход</a>
+            </div>
+        </div>
+        <div class="col-md-4 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Проекты</h4>
+                </div>
+                <div class="row mt-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Ответственный</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for project in projects %}
+                            <tr>
+                                <td>{{ project.name }}</td>
+                                <td>{{ project.project_manager }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+                </div>
+        </div>
+        <div class="col-md-5">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Задачи</h4>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Проект</th>
+                            <th>Ответственный</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.project.name }}</td>
+                            <td>{{ task.task_executor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}
