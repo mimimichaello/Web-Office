@@ -76,7 +76,7 @@ class CreateEmployeeView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return super().form_valid(form)
 
 
-class CreateClientView(LoginRequiredMixin, CreateView):
+class CreateClientView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = Client
     form_class = CreateClientForm
     success_url = reverse_lazy("dashboard")
@@ -108,7 +108,7 @@ class CreateClientView(LoginRequiredMixin, CreateView):
 
 
 
-class CreateCompanyView(CreateView):
+class CreateCompanyView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
     model = Company
     form_class = CreateCompanyForm
     success_url = reverse_lazy("dashboard")
